@@ -14,8 +14,16 @@ package com.example.mvvmprojectdemo.player
  * -封面
  * 暂停音乐
  * 更新ui状态为暂停
+ *
+ * UI驱动开发
  */
-class PlayerPresenter {
+class PlayerPresenter private constructor(){
+    //使用懒加载，不会重复加载，需要才加载且是线程安全
+    companion object{
+        val instance by lazy {
+            PlayerPresenter()
+        }
+    }
 
     enum class PlayState {
         NONE, PLAYING, PAUSE, LOADING

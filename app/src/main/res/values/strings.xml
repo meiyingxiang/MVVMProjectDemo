@@ -3,4 +3,5 @@
     <string name="play_text">播放</string>
     <string name="play_next_text">下一首</string>
     <string name="play_previous_text">上一首</string>
+    <string name="music_list_btn">获取音乐列表</string>
 </resources>
