@@ -1,8 +1,10 @@
 package com.example.mvvmprojectdemo.player.music.list
 
 import android.util.Log
+import com.example.mvvmprojectdemo.lifecycle.AbsLifecycle
 import com.example.mvvmprojectdemo.lifecycle.ILifecycle
 import com.example.mvvmprojectdemo.lifecycle.ILifecycleOwner
+import com.example.mvvmprojectdemo.lifecycle.LifeState
 import com.example.mvvmprojectdemo.player.DataListenerContainer
 import com.example.mvvmprojectdemo.player.domain.Music
 
@@ -53,7 +55,7 @@ class MusicPresenter3(owner: ILifecycleOwner) : MusicModel.OnMusicLoadResult {
         loadState.value = MusicLoadState.ERROR
     }
 
-    inner class ViewLifecycleImpl : ILifecycle {
+    inner class ViewLifecycleImpl : AbsLifecycle() {
 
 
         override fun onCreate() {
@@ -80,6 +82,10 @@ class MusicPresenter3(owner: ILifecycleOwner) : MusicModel.OnMusicLoadResult {
 
         override fun onDestroy() {
 
+        }
+
+        override fun onViewLifecycleChange(state: LifeState) {
+            Log.e("Frank", "当前状态: state=$state");
         }
     }
 }

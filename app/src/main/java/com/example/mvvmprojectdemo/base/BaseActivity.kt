@@ -2,23 +2,24 @@ package com.example.mvvmprojectdemo.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mvvmprojectdemo.lifecycle.AbsLifecycle
 import com.example.mvvmprojectdemo.lifecycle.ILifecycle
 import com.example.mvvmprojectdemo.lifecycle.LifeState
 import com.example.mvvmprojectdemo.lifecycle.LifecycleProvider
 
 open class BaseActivity : AppCompatActivity() {
 
-    private val lifeCycleListener = arrayListOf<ILifecycle>()
+    private val lifeCycleListener = arrayListOf<AbsLifecycle>()
 
-    fun addLifeCycleListener(iLifecycle: ILifecycle) {
-        if (!lifeCycleListener.contains(iLifecycle)) {
-            lifeCycleListener.add(iLifecycle)
+    fun addLifeCycleListener(absLifecycle: AbsLifecycle) {
+        if (!lifeCycleListener.contains(absLifecycle)) {
+            lifeCycleListener.add(absLifecycle)
         }
     }
 
-    fun remoteLifeCycleListener(iLifecycle: ILifecycle) {
-        if (lifeCycleListener.contains(iLifecycle)) {
-            lifeCycleListener.remove(iLifecycle)
+    fun remoteLifeCycleListener(absLifecycle: AbsLifecycle) {
+        if (lifeCycleListener.contains(absLifecycle)) {
+            lifeCycleListener.remove(absLifecycle)
         }
     }
 

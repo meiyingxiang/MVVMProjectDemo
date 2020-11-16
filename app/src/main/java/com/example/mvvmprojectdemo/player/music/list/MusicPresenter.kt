@@ -1,11 +1,13 @@
 package com.example.mvvmprojectdemo.player.music.list
 
 import android.util.Log
+import com.example.mvvmprojectdemo.lifecycle.AbsLifecycle
 import com.example.mvvmprojectdemo.lifecycle.ILifecycle
+import com.example.mvvmprojectdemo.lifecycle.LifeState
 import com.example.mvvmprojectdemo.player.DataListenerContainer
 import com.example.mvvmprojectdemo.player.domain.Music
 
-class MusicPresenter : MusicModel.OnMusicLoadResult, ILifecycle {
+class MusicPresenter : MusicModel.OnMusicLoadResult, AbsLifecycle() {
 
     private val musicModel by lazy {
         MusicModel()
@@ -67,6 +69,10 @@ class MusicPresenter : MusicModel.OnMusicLoadResult, ILifecycle {
     }
 
     override fun onDestroy() {
+
+    }
+
+    override fun onViewLifecycleChange(state: LifeState) {
 
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mvvmprojectdemo.lifecycle
 
+import android.util.Log
 import com.example.mvvmprojectdemo.lifecycle.ILifecycle
 
 /**
@@ -8,24 +9,28 @@ import com.example.mvvmprojectdemo.lifecycle.ILifecycle
  */
 open class LifecycleProvider {
 
-    private var currentLifeState: LifeState? = null
+    private var currentLifeState: LifeState = LifeState.DESTROY
 
-    private val lifeCycleListener = arrayListOf<ILifecycle>()
+    private val lifeCycleListener = arrayListOf<AbsLifecycle>()
 
-    fun addLifeCycleListener(iLifecycle: ILifecycle) {
-        if (!lifeCycleListener.contains(iLifecycle)) {
-            lifeCycleListener.add(iLifecycle)
+    fun addLifeCycleListener(absLifecycle: AbsLifecycle) {
+        if (!lifeCycleListener.contains(absLifecycle)) {
+            lifeCycleListener.add(absLifecycle)
         }
     }
 
-    fun remoteLifeCycleListener(iLifecycle: ILifecycle) {
-        if (lifeCycleListener.contains(iLifecycle)) {
-            lifeCycleListener.remove(iLifecycle)
+    fun remoteLifeCycleListener(absLifecycle: AbsLifecycle) {
+        if (lifeCycleListener.contains(absLifecycle)) {
+            lifeCycleListener.remove(absLifecycle)
         }
     }
 
     fun makeLifeState(state: LifeState) {
         currentLifeState = state
+        lifeCycleListener.forEach {
+            //通知改变状态
+            it.onViewLifecycleChange(state)
+        }
         when (state) {
             LifeState.CREATE -> {
                 dispatchCreateState()
@@ -76,6 +81,11 @@ open class LifecycleProvider {
         lifeCycleListener.forEach {
             it.onCreate()
         }
+    }
+
+    fun isAtLeast(state: LifeState): Boolean {
+        Log.e("Frank", "当前状态: $currentLifeState,运行状态 $state");
+        return currentLifeState > state
     }
 
 }
