@@ -1,4 +1,4 @@
-package com.example.mvvmprojectdemo.player
+package com.example.mvvmprojectdemo.player.music.play
 
 /**
  * 播放音乐

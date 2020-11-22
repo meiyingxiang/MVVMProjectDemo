@@ -3,6 +3,8 @@ package com.example.mvvmprojectdemo.player
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvmprojectdemo.R
+import com.example.mvvmprojectdemo.player.music.play.IPlayerCallBack
+import com.example.mvvmprojectdemo.player.music.play.PlayerPresenter
 import kotlinx.android.synthetic.main.activity_float_player.*
 
 class FloatPlayerControllerActivity : AppCompatActivity(), IPlayerCallBack {

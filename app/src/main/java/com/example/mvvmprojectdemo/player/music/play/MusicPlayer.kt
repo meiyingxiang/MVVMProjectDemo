@@ -1,4 +1,4 @@
-package com.example.mvvmprojectdemo.player
+package com.example.mvvmprojectdemo.player.music.play
 
 import com.example.mvvmprojectdemo.player.domain.Music
 

@@ -1,5 +1,6 @@
-package com.example.mvvmprojectdemo.player
+package com.example.mvvmprojectdemo.player.music.play
 
+import com.example.mvvmprojectdemo.player.DataListenerContainer
 import com.example.mvvmprojectdemo.player.domain.Music
 
 /**
@@ -31,7 +32,7 @@ class PlayerPresenter2 private constructor() {
 
     var currentMusic = DataListenerContainer<Music>()
 
-    var currentPlayState = DataListenerContainer<PlayerPresenter2.PlayState>()
+    var currentPlayState = DataListenerContainer<PlayState>()
 
 
     //使用懒加载，不会重复加载，需要才加载且是线程安全

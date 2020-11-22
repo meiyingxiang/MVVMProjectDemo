@@ -1,47 +1,23 @@
-package com.example.mvvmprojectdemo.player
+package com.example.mvvmprojectdemo.player.music.play
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvmprojectdemo.R
 import kotlinx.android.synthetic.main.activity_player_layout.*
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.longToast
 
 
-class PlayerActivity2 : AppCompatActivity() {
+class PlayerActivity : AppCompatActivity(), IPlayerCallBack {
 
     private val playerPresenter by lazy {
-        PlayerPresenter2.instance
+        PlayerPresenter.instance
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player_layout)
+        playerPresenter.registerCallBack(this)
         initListener()
-        initDataListener()
-    }
-
-    /**
-     * 对数据进行监听，更新UI
-     */
-    private fun initDataListener() {
-        playerPresenter.currentMusic.addListener {
-            //数据变化，更新UI
-            songTitle.text = it?.name
-            toast("更换封面 ${it?.cover}").show()
-        }
-        playerPresenter.currentPlayState.addListener {
-            //音乐状态监听
-            playerOrPauseBtn.text = when (it) {
-                PlayerPresenter2.PlayState.PAUSE -> {
-                    "播放"
-                }
-                PlayerPresenter2.PlayState.PLAYING -> {
-                    "暂停"
-                }
-                else -> "播放"
-            }
-        }
-
     }
 
     /**
@@ -62,4 +38,33 @@ class PlayerActivity2 : AppCompatActivity() {
             playerPresenter.playPrevious()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        playerPresenter.unRegisterCallBack(this)
+    }
+
+    override fun onTitleChange(title: String) {
+        songTitle.text = title
+    }
+
+    override fun onProgressChange(current: Int) {
+
+    }
+
+    override fun onPlaying() {
+        //播放中，显示暂停
+        playerOrPauseBtn.text = "暂停"
+    }
+
+    override fun onPlayerPause() {
+        //暂停，显示播放
+        playerOrPauseBtn.text = "播放"
+    }
+
+    override fun onCoverChange(cover: String) {
+        //更换背景图
+        longToast("更换封面 $cover").show()
+    }
+
 }
