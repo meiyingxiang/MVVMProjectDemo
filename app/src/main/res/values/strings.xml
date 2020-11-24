@@ -4,4 +4,7 @@
     <string name="play_next_text">下一首</string>
     <string name="play_previous_text">上一首</string>
     <string name="music_list_btn">获取音乐列表</string>
+    <string name="loading">正在加载中…</string>
+    <string name="text_network_error_tips">点击重新加载…</string>
+    <string name="tvEmpty">内容为空…</string>
 </resources>
